@@ -1,6 +1,10 @@
 # 📈 Bitcoin Cycle Forecaster: An MLOps Approach
-
 This project is a production-grade Machine Learning pipeline designed to analyze and forecast Bitcoin (BTC) price cycles. Instead of a simple research script, it implements **MLOps best practices**, modular software engineering, and experiment tracking to ensure scalability and reproducibility.
+
+## 🖥️ Interactive Dashboard
+The project includes a professional-grade dashboard for real-time model interaction.
+![Dashboard Screenshot](data/img/prediction_1.png) 
+*Features: Dynamic parameter tuning, interactive Plotly charts, and real-time metrics.*
 
 ---
 
@@ -14,6 +18,9 @@ The goal is to provide a robust framework for forecasting BTC prices for the nex
 *   **Data Ingestion:** Yahoo Finance API (`yfinance`)
 *   **Configuration:** YAML
 *   **Environment Management:** Virtualenv / Requirements.txt
+*   **Frontend:** Streamlit
+*   **Visualization:** Plotly
+*   **Deployment:** Docker & Hugging Face Spaces
 
 ## 🏗 Project Structure
 The project follows a modular architecture, separating data, configuration, and source code—a key requirement for production-stable AI systems.
@@ -27,10 +34,14 @@ BITCOIN-CYCLE-FORECASTER/
 │   └── processed/        # Model outputs and forecasts
 ├── models/               # Locally saved model artifacts and plots
 ├── src/                  # Source code (Modular Engineering)
-│   ├── download_data.py  # Data Ingestion Pipeline
-│   └── train.py          # Training, Evaluation & MLflow Logging
+│   └── app.py            # Streamlit Interactive UI
+|   └── prepareing
+|           └──download_data.py  # Data Ingestion Pipeline
+│   └── training
+|          └── train.py          # Training, Evaluation & MLflow Logging
 ├── venv/                 # Isolated virtual environment
 ├── requirements.txt      # Dependency management
+├── Dockerfile            # Containerization
 └── README.md             # Project documentation
 ```
 
@@ -87,8 +98,14 @@ The project is fully containerized for production consistency.
 ```bash
 docker build -t btc-forecaster .
 
-------
+docker run -p 8501:8501 btc-forecaster
+````
+---
+## Run the Interactive Dashboard
+Launch the Streamlit UI to interact with the model:
+streamlit run src/app.py
 
+---
 ## 💡 Key Engineering Features Implemented
 *   **Decoupled Configuration:** No hardcoded variables. All model parameters are managed via `config/model_config.yaml`.
 *   **Resource Management:** Explicit use of `matplotlib` figure objects and memory cleanup (`plt.close(fig)`) for scalable batch processing.

@@ -1,5 +1,6 @@
 ticker: "BTC-USD"
-start_date: "2010-01-01"
+start_date: "2012-01-01"
+forecast_horizon_days: 1460
 model_params:
   changepoint_prior_scale: 0.05
   seasonality_mode: 'multiplicative'
